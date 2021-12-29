@@ -4,11 +4,11 @@ let page;
 //shared on github
 beforeEach(async () => {
   browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     defaultViewport: null,
     devtools: false,
     args: ["--window-size=1920,1080"],
-    slowMo: 0,
+    slowMo: 30,
   });
   page = await browser.newPage();
   await page.goto("https://www.mitigram.com");
@@ -77,11 +77,14 @@ describe("Test suite", () => {
       await page.click("[href='/careers']");
       await page.waitForSelector("[href='#open-positions']");
       await page.click("[href='#open-positions']");
-      const $position = await page.$x("//a[.=" + position + "]");
-      await page.click($position);
-      const learnMore = await page.$x("(//a[.=" + position + "]/..//a)[2]");
-      await page.click(learnMore);
-      expect(address).toEqual(page.title());
+      const $position = await page.$x(`//a[.='${position}']`);
+      await $position[0].click();
+      const learnMore = await page.$x(`(//a[.='${position}']/..//a)[2]`);
+      await page.waitForXPath(`(//a[.='Legal Counsel']/..//a)[2]`);
+      await learnMore[0].click();
+      await page.waitForNavigation();
+
+      expect(address).toEqual(await page.url());
     }
   );
 });
