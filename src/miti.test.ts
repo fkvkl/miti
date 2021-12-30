@@ -91,9 +91,9 @@ describe("Test suite", () => {
     const solutions = await page.$x("//span[.='Solutions']");
     await solutions[0].hover();
     await page.click("#byproductitemright>a[href='/mitigram-for-corporates']");
-    await page.waitForSelector("#ff_elem950.ff_elem.inputbox");
-    await page.type("#ff_elem950.ff_elem.inputbox", "New", { delay: 100 });
-    await page.type("#ff_elem951.ff_elem.inputbox", "Customer");
-    await page.type("#ff_elem952.ff_elem.inputbox", "Secret Company");
+    await page.waitForSelector("[name='ff_nm_firstName[]']");
+    await page.type("[name='ff_nm_firstName[]']", "New");
+    await page.type("[name='ff_nm_lastName[]']", "Customer");
+    await page.type("[name='ff_nm_company[]']", "Secret Company");
   });
 });
