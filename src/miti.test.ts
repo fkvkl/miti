@@ -95,5 +95,6 @@ describe("Test suite", () => {
     await page.type("[name='ff_nm_firstName[]']", "New");
     await page.type("[name='ff_nm_lastName[]']", "Customer");
     await page.type("[name='ff_nm_company[]']", "Secret Company");
+    await page.select("[name='ff_nm_country[]']", "SE");
   });
 });
