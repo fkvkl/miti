@@ -64,7 +64,7 @@ describe("Test suite", () => {
     console.log(options);
   });
 
-  it.each`
+  test.each`
     position                         | address
     ${"Back-end Software Engineer"}  | ${"https://www.mitigram.com/images/ads/Back-End_Software_Engineer.pdf"}
     ${"Front-end Software Engineer"} | ${"https://www.mitigram.com/images/ads/Front-End_Software_Engineer.pdf"}
@@ -87,4 +87,13 @@ describe("Test suite", () => {
       expect(address).toEqual(await page.url());
     }
   );
+  test.only("Request a personal demo", async () => {
+    const solutions = await page.$x("//span[.='Solutions']");
+    await solutions[0].hover();
+    await page.click("#byproductitemright>a[href='/mitigram-for-corporates']");
+    await page.waitForSelector("#ff_elem950.ff_elem.inputbox");
+    await page.type("#ff_elem950.ff_elem.inputbox", "New", { delay: 100 });
+    await page.type("#ff_elem951.ff_elem.inputbox", "Customer");
+    await page.type("#ff_elem952.ff_elem.inputbox", "Secret Company");
+  });
 });
