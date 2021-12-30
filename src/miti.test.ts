@@ -23,46 +23,46 @@ afterEach(async () => {
   await browser.close();
 });
 describe("Test suite", () => {
-  // test("Display open positions", async () => {
-  //   await page.click("[href='/careers']");
-  //   await page.waitForSelector("[href='#open-positions']");
-  //   await page.click("[href='#open-positions']");
-  //   await page.waitForSelector("span#open-positions");
-  //   let element = await page.$("span#open-positions");
-  //   const value = await page.evaluate((element) => element.innerText, element);
-  //   //let value = await page.evaluate((el) => el.textContent, element);
-  //   expect(value).toBe("Open positions");
-  // });
+  test("Display open positions", async () => {
+    await page.click("[href='/careers']");
+    await page.waitForSelector("[href='#open-positions']");
+    await page.click("[href='#open-positions']");
+    await page.waitForSelector("span#open-positions");
+    let element = await page.$("span#open-positions");
+    const value = await page.evaluate((element) => element.innerText, element);
+    //let value = await page.evaluate((el) => el.textContent, element);
+    expect(value).toBe("Open positions");
+  });
 
-  // test("Filter positions", async () => {
-  //   let test = "FilterPositions";
-  //   await page.click("[href='/careers']");
-  //   await page.waitForSelector("[href='#open-positions']");
-  //   await page.click("[href='#open-positions']");
-  //   const elements = await page.$x("//a[.='Engineering']"); //using xpath
-  //   await elements[0].click();
-  //   await page.screenshot({
-  //     path: `screenshots/${test + Date.now()}.png`,
-  //     fullPage: "true",
-  //   });
-  //   const positions = await page.$$("[data-tag='engineering']>a"); //findall
-  //   for (const el of positions) {
-  //     var value = await page.evaluate((el) => el.innerText, el);
-  //     expect(value).toContain("Engineer");
-  //   }
-  // });
+  test("Filter positions", async () => {
+    let test = "FilterPositions";
+    await page.click("[href='/careers']");
+    await page.waitForSelector("[href='#open-positions']");
+    await page.click("[href='#open-positions']");
+    const elements = await page.$x("//a[.='Engineering']"); //using xpath
+    await elements[0].click();
+    await page.screenshot({
+      path: `screenshots/${test + Date.now()}.png`,
+      fullPage: "true",
+    });
+    const positions = await page.$$("[data-tag='engineering']>a"); //findall
+    for (const el of positions) {
+      var value = await page.evaluate((el) => el.innerText, el);
+      expect(value).toContain("Engineer");
+    }
+  });
 
-  // test("test in progress", async () => {
-  //   await page.click("[href='/careers']");
-  //   await page.waitForSelector("[href='#open-positions']");
-  //   await page.click("[href='#open-positions']");
-  //   const elements = await page.$x("//a[.='Engineering']"); //using xpath
-  //   await elements[0].click();
-  //   const options = await page.$$eval("[data-tag='engineering']>a", (options) =>
-  //     options.map((option) => option.textContent)
-  //   );
-  //   console.log(options);
-  // });
+  test("test in progress", async () => {
+    await page.click("[href='/careers']");
+    await page.waitForSelector("[href='#open-positions']");
+    await page.click("[href='#open-positions']");
+    const elements = await page.$x("//a[.='Engineering']"); //using xpath
+    await elements[0].click();
+    const options = await page.$$eval("[data-tag='engineering']>a", (options) =>
+      options.map((option) => option.textContent)
+    );
+    console.log(options);
+  });
 
   it.each`
     position                         | address
@@ -80,7 +80,7 @@ describe("Test suite", () => {
       const $position = await page.$x(`//a[.='${position}']`);
       await $position[0].click();
       const learnMore = await page.$x(`(//a[.='${position}']/..//a)[2]`);
-      await page.waitForXPath(`(//a[.='Legal Counsel']/..//a)[2]`);
+      await page.waitForXPath(`(//a[.='${position}']/..//a)[2]`);
       await learnMore[0].click();
       await page.waitForNavigation();
 
