@@ -22,6 +22,7 @@ beforeEach(async () => {
 afterEach(async () => {
   await browser.close();
 });
+
 describe("Test suite", () => {
   test("Display open positions", async () => {
     await page.click("[href='/careers']");
