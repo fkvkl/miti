@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 let browser;
 let page;
-//shared on github
+
 beforeEach(async () => {
   browser = await puppeteer.launch({
     headless: false,
@@ -23,7 +23,7 @@ afterEach(async () => {
   await browser.close();
 });
 
-describe("Test suite", () => {
+describe("Career page", () => {
   test("Display open positions", async () => {
     await page.click("[href='/careers']");
     await page.waitForSelector("[href='#open-positions']");
@@ -31,7 +31,7 @@ describe("Test suite", () => {
     await page.waitForSelector("span#open-positions");
     let element = await page.$("span#open-positions");
     const value = await page.evaluate((element) => element.innerText, element);
-    //let value = await page.evaluate((el) => el.textContent, element);
+
     expect(value).toBe("Open positions");
   });
 
@@ -88,6 +88,7 @@ describe("Test suite", () => {
       expect(address).toEqual(await page.url());
     }
   );
+  
   test.only("Request a personal demo", async () => {
     const solutions = await page.$x("//span[.='Solutions']");
     await solutions[0].hover();
